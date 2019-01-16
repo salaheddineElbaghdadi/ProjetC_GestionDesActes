@@ -20,6 +20,7 @@ void main()
     first->data = (void*)&info1;
     first->next = NULL;
 
+    printf("Hello");
     _list_add(first, (void*)&info2);
     _list_show(first);
 }
