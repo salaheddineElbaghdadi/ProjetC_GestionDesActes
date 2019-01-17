@@ -21,6 +21,6 @@ void main()
     first->next = NULL;
 
     printf("Hello");
-    _list_add(first, (void*)&info2);
-    _list_show(first);
+    //_list_add(first, (void*)&info2);
+    //_list_show(first);
 }
