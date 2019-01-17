@@ -60,7 +60,7 @@ void _list_show(struct Node *_first)
     while (_first->next != NULL)
     {
         printf("Log: shown");
-        _first++;
+        _first = _first->next;
     }
     printf("Log: shown");
 }
