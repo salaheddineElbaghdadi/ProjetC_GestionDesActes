@@ -1,3 +1,6 @@
+#ifndef PERSONNE_H
+#define PERSONNE_H
+
 #define CMAX 30
 #define TAILLE_IDENTIFIANT 5
 
@@ -14,7 +17,7 @@ struct Date
 enum Sexe { Homme, Femme, Autre }  Sexe;
 
 // Definition structure personne
-typedef struct Personne
+struct Personne
 {
 	char nom[CMAX];
 	char prenom[CMAX];
@@ -23,4 +26,6 @@ typedef struct Personne
 	char Identifiant[TAILLE_IDENTIFIANT];
 
 	// Ici ajouter nombre d'enfants et leurs identifiants
-} Personne;
+};
+
+#endif

@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
+#include "Personne.h"
 
 // Adds new node with the given data to the end of the linked list
-void _list_add(struct Node *_first, Personne *new_data)
+void _list_add(struct Node *_first,struct Personne *new_data)
 {
     struct Node *ptr = _first;
     while (ptr->next != NULL)
@@ -13,7 +14,7 @@ void _list_add(struct Node *_first, Personne *new_data)
 
     // When ptr->next == NULL
     ptr->next = (struct Node*)malloc(sizeof(struct Node));
-    ptr->next->data = (Personne *)malloc(sizeof(Personne));
+    ptr->next->data = (struct Personne *)malloc(sizeof(struct Personne));
     ptr->next->data = new_data;
     ptr->next->next = NULL;
 }
@@ -21,7 +22,7 @@ void _list_add(struct Node *_first, Personne *new_data)
 
 void _list_delete(struct Node **_first, struct Node *_node)
 {
-  struct Node *_node = _ptr;
+  struct Node *_ptr = _node;
 
   // First in the list
   if (_ptr == *_first)
