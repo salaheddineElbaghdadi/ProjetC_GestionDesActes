@@ -1,8 +1,7 @@
 #ifndef PERSONNE_H
 #define PERSONNE_H
 
-#define CMAX 30
-#define TAILLE_IDENTIFIANT 5
+#include "const.h"
 
 // Definition date
 struct Date
@@ -14,7 +13,7 @@ struct Date
 
 
 // Definition sex
-enum Sexe { Homme, Femme, Autre }  Sexe;
+enum Sexe { Homme, Femme }  Sexe;
 
 // Definition structure personne
 struct Personne

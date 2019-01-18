@@ -65,3 +65,17 @@ void _list_show(struct Node *_first)
     }
     printf("Log: shown");
 }
+
+
+// Save list in file
+void _list_save()
+{
+
+}
+
+
+// Load list from file
+void _list_load()
+{
+
+}
