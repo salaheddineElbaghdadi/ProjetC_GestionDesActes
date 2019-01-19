@@ -89,12 +89,7 @@ void _list_delete(struct Node **_first, struct Node *_node)
 // Show the list
 void _list_show(struct Node *_first)
 {
-    while (_first->next != NULL)
-    {
-        printf("Log: shown");
-        _first = _first->next;
-    }
-    printf("Log: shown");
+
 }
 
 
