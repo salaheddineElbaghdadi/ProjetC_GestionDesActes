@@ -18,13 +18,15 @@ enum Sexe { Homme, Femme }  Sexe;
 // Definition structure personne
 struct Personne
 {
-	char nom[CMAX];
-	char prenom[CMAX];
+	char nom[NAME_SIZE];
+	char prenom[NAME_SIZE];
 	enum Sexe sexe;
 	struct Date dateDeNaissance;
-	char Identifiant[TAILLE_IDENTIFIANT];
+	int Identifiant;
 
 	// Ici ajouter nombre d'enfants et leurs identifiants
+	int nombreEnfants;
+	int enfants[NOMBRE_ENFANTS_MAX];
 };
 
 #endif

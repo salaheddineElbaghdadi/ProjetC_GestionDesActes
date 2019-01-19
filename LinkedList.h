@@ -6,7 +6,7 @@
 // Node structur
 struct Node 
 {
-   void *data;
+   struct Personne *data;
    struct Node *next;
 };
 
@@ -15,6 +15,8 @@ struct Node
 void _list_add(struct Node*, struct Personne*);
 void _list_delete(struct Node**, struct Node*);
 void _list_show(struct Node*);
+void _list_save(struct Node*);
+struct Node *_list_create();
 
 
 #endif
