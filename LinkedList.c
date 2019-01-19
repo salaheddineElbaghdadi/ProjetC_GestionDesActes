@@ -124,6 +124,8 @@ void _list_save(struct Node *first)
     }
     printf("after ptr->next in while loop\n");
 	}while(ptr->next != NULL && ptr != NULL);
+
+	fclose(file);
 	free(file);
 
 	printf("Log: saved to file\n");
