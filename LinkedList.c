@@ -43,7 +43,7 @@ void _list_add(struct Node *_first,struct Personne *new_data)
       ptr->next->data = new_data;
       ptr->next->next = NULL;
     }
-    
+
 
     //printf("%d\n", ptr->next->data->Identifiant);
 
@@ -86,28 +86,47 @@ void _list_delete(struct Node **_first, struct Node *_node)
 }
 
 
-// Show the list
+
 void _list_show(struct Node *_first)
 {
-
+  // Pointing on the first node
+	struct Node *ptr = _first;
+  // Showing the list
+  do
+  {
+    Personne = ptr->Personne;
+    printf("Le nom est : %s \n",Personne.nom);
+    printf("Le prenom est : %s \n",Personne.prenom);
+    //Here add sex
+    //printf("Le sex est :\n");
+    printf("La date de naissance :\n");
+    printf("Le jour : %d \n",Personne->dateDeNaissance.jour);
+    printf("Le mois : %d \n",Personne->dateDeNaissance.mois);
+    printf("L annee : %d \n",Personne->dateDeNaissance.annee);
+    printf("L ide est : %d \n",Personne.Idantifiant);
+    //Here add the number of children and their id
+    //printf("Le nombre d'enfants et leurs id :\n");
+    ptr = ptr->next;
+  }
+  while(ptr != NULL);
 }
 
 
 // Save list in file
-void _list_save(struct Node *first)
+void _list_save(struct Node *_first)
 {
 	// Opening the file
 	FILE *file;
 	file = fopen(FILE_NAME, "wb");
 
 	// Pointing the first node of the list
-	struct Node *ptr = first;
+	struct Node *ptr = _first;
 
-	// Writing to the file
+	// Writing on the file
 	do
 	{
 		printf("Log: entered while loop\n");
-		// Check if the data pointer is pointing to a struct and is not pointing to NULL
+		// Check if the data pointer is pointing on a struct and is not pointing on NULL
 		if (ptr->data != NULL)
 		{
 			fwrite(ptr->data, sizeof(struct Personne), 1, file);
