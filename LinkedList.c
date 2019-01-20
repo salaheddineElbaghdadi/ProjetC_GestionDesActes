@@ -103,7 +103,7 @@ void _list_show(struct Node *_first)
     printf("Le jour : %d \n",Personne->dateDeNaissance.jour);
     printf("Le mois : %d \n",Personne->dateDeNaissance.mois);
     printf("L annee : %d \n",Personne->dateDeNaissance.annee);
-    printf("L ide est : %d \n",Personne.Idantifiant);
+    printf("L ide est : %d \n",Personne.Identifiant);
     //Here add the number of children and their id
     //printf("Le nombre d'enfants et leurs id :\n");
     ptr = ptr->next;
@@ -144,6 +144,41 @@ void _list_save(struct Node *_first)
 
 	printf("Log: saved to file\n");
 }
+
+
+
+void _search_by_id(struct Node *_first)
+{
+	int id;
+	printf("Entrer l'id de la personne recherchee : \n ");
+	scanf("%d",&id);
+	struct Node *ptr = _first;
+	Personne = ptr->Personne;
+	while( (ptr !=NULL) && (id != Personne.Identifiant) )
+	{
+		ptr = ptr->next;
+	}
+	if ( (ptr == NULL) || (id != Personne.Identifiant) )
+	{
+				return NULL;
+	}
+	else
+	{
+		printf("Le nom est : %s \n",Personne.nom);
+		printf("Le prenom est : %s \n",Personne.prenom);
+		//Here add sex
+		//printf("Le sex est :\n");
+		printf("La date de naissance :\n");
+		printf("Le jour : %d \n",Personne->dateDeNaissance.jour);
+		printf("Le mois : %d \n",Personne->dateDeNaissance.mois);
+		printf("L annee : %d \n",Personne->dateDeNaissance.annee);
+		printf("L ide est : %d \n",Personne.Identifiant);
+		//Here add the number of children and their id
+		//printf("Le nombre d'enfants et leurs id :\n");
+	}
+}
+
+
 
 
 // Load list from file
