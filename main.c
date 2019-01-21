@@ -9,31 +9,39 @@ void main()
 {
     //struct Node *list = (struct Node*)malloc(sizeof(struct Node));
     struct Node *_first_node = _list_create();
-    printf("Log: list created\n");
-    //_first_node.data = (struct Personne*)malloc(sizeof(struct Personne));
 
-    //_first_node->next = NULL;
-    //list = &_first_node;
-    //list->next = NULL;
+    // data for testing the save and load funtions
+    struct Personne p;
+    
+    strcpy(p.nom, "EL BAGHDADI");
+    strcpy(p.prenom, "Salah-Eddine");
+    p.identifiant = 00132;
+    p.dateDeNaissance.jour = 17;
+    p.dateDeNaissance.mois = 4;
+    p.dateDeNaissance.annee = 1998;
+    p.sexe = Homme;
+    p.nombreEnfants = 0;
 
-    struct Personne p1;
-    strcpy(p1.nom, "NomP1");
-    strcpy(p1.prenom, "PrenomP1");
-    p1.sexe = Homme;
-    struct Date DateDeNaissanceP1 = {17, 4, 1998};
-    p1.dateDeNaissance = DateDeNaissanceP1;
-    p1.Identifiant = 12345;
-    p1.nombreEnfants = 0;
-
-    _list_add(_first_node, &p1);
-    printf("Log: after list add:%d\n", _first_node->data->Identifiant);
+    struct Personne p2;
+    
+    strcpy(p.nom, "nomP2");
+    strcpy(p.prenom, "prenomP2");
+    p2.identifiant = 22222;
+    p2.dateDeNaissance.jour = 17;
+    p2.dateDeNaissance.mois = 4;
+    p2.dateDeNaissance.annee = 1998;
+    p2.sexe = Homme;
+    p2.nombreEnfants = 0;
+    
+    _list_add(_first_node, &p);
+    p.identifiant = 12982;
+    _list_add(_first_node, &p);
+    p.identifiant = 48930;
+    _list_add(_first_node, &p2);
     _list_save(_first_node);
-    printf("Log: after list save:%d\n", _first_node->data->Identifiant);
-    //_list_show(first);
 
-    _list_add(_first_node, &p1);
-    _list_save(_first_node);
-    printf("Log: after list save:%d\n", _first_node->next->data->Identifiant);
+    _list_load(&_first_node);
+    _list_show(_first_node);
 
     printf("Log: End of main function\n");
 }

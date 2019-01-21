@@ -90,25 +90,18 @@ void _list_delete(struct Node **_first, struct Node *_node)
 void _list_show(struct Node *_first)
 {
   // Pointing on the first node
-	struct Node *ptr = _first;
+	struct Node *_ptr = _first;
   // Showing the list
-  do
+  while (_ptr != NULL)
   {
-    Personne = ptr->Personne;
-    printf("Le nom est : %s \n",Personne.nom);
-    printf("Le prenom est : %s \n",Personne.prenom);
-    //Here add sex
-    //printf("Le sex est :\n");
-    printf("La date de naissance :\n");
-    printf("Le jour : %d \n",Personne->dateDeNaissance.jour);
-    printf("Le mois : %d \n",Personne->dateDeNaissance.mois);
-    printf("L annee : %d \n",Personne->dateDeNaissance.annee);
-    printf("L ide est : %d \n",Personne.Identifiant);
-    //Here add the number of children and their id
-    //printf("Le nombre d'enfants et leurs id :\n");
-    ptr = ptr->next;
+    if (_ptr->data != NULL)
+    {
+      printf("%d     %s  %s\n", _ptr->data->identifiant,
+                                _ptr->data->nom,
+                                _ptr->data->prenom);
+    }
+    _ptr = _ptr->next;
   }
-  while(ptr != NULL);
 }
 
 
@@ -132,12 +125,10 @@ void _list_save(struct Node *_first)
 			fwrite(ptr->data, sizeof(struct Personne), 1, file);
 			printf("Log: data not null\n");
 		}
-    if (ptr->next != NULL)
-    {
-		  ptr = ptr->next;
-    }
+		
+    ptr = ptr->next;
     printf("after ptr->next in while loop\n");
-	}while(ptr->next != NULL && ptr != NULL);
+	}while(ptr != NULL);
 
 	fclose(file);
 	free(file);
@@ -147,34 +138,22 @@ void _list_save(struct Node *_first)
 
 
 
-void _search_by_id(struct Node *_first)
+struct Node *_list_search_by_id(struct Node *_first, int _id)
 {
-	int id;
-	printf("Entrer l'id de la personne recherchee : \n ");
-	scanf("%d",&id);
-	struct Node *ptr = _first;
-	Personne = ptr->Personne;
-	while( (ptr !=NULL) && (id != Personne.Identifiant) )
+  struct Node *_ptr = _first;
+
+	while( (_ptr != NULL) && (_id != _ptr->data->identifiant != _id) )
 	{
-		ptr = ptr->next;
+		_ptr = _ptr->next;
 	}
-	if ( (ptr == NULL) || (id != Personne.Identifiant) )
+
+	if ( (_ptr == NULL) || (_id != _ptr->data->identifiant) )
 	{
-				return NULL;
+	  return NULL;
 	}
 	else
 	{
-		printf("Le nom est : %s \n",Personne.nom);
-		printf("Le prenom est : %s \n",Personne.prenom);
-		//Here add sex
-		//printf("Le sex est :\n");
-		printf("La date de naissance :\n");
-		printf("Le jour : %d \n",Personne->dateDeNaissance.jour);
-		printf("Le mois : %d \n",Personne->dateDeNaissance.mois);
-		printf("L annee : %d \n",Personne->dateDeNaissance.annee);
-		printf("L ide est : %d \n",Personne.Identifiant);
-		//Here add the number of children and their id
-		//printf("Le nombre d'enfants et leurs id :\n");
+    return _ptr;
 	}
 }
 
@@ -182,7 +161,23 @@ void _search_by_id(struct Node *_first)
 
 
 // Load list from file
-void _list_load()
+void _list_load(struct Node **_first)
 {
+  FILE *file;
+  file = fopen(FILE_NAME, "rb");
+
+  *_first = _list_create();
+  
+  //struct Node *_new_node = (struct Node*)malloc(sizeof(struct Node));
+  struct Personne *_new_data = (struct Personne*)malloc(sizeof(struct Personne));
+  
+  if (file != NULL)
+  {
+    while(fread(_new_data, sizeof(struct Personne), 1, file) != 0)
+    { 
+      _list_add(*_first, _new_data);
+      _new_data = (struct Personne*)malloc(sizeof(struct Personne));
+    }
+  }
 
 }

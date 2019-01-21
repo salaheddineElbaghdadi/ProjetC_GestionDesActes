@@ -16,7 +16,9 @@ void _list_add(struct Node*, struct Personne*);
 void _list_delete(struct Node**, struct Node*);
 void _list_show(struct Node*);
 void _list_save(struct Node*);
+void _list_load(struct Node**);
 struct Node *_list_create();
+struct Node *_list_search_by_id(struct Node*, int);
 
 
 #endif

@@ -22,11 +22,15 @@ struct Personne
 	char prenom[NAME_SIZE];
 	enum Sexe sexe;
 	struct Date dateDeNaissance;
-	int Identifiant;
+	int identifiant;
 
 	// Ici ajouter nombre d'enfants et leurs identifiants
 	int nombreEnfants;
 	int enfants[NOMBRE_ENFANTS_MAX];
 };
+
+
+// Prototypes
+void _personne_show(struct Personne*);
 
 #endif
