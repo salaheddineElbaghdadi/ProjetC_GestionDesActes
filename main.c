@@ -10,10 +10,12 @@ void main()
 {
     //struct Node *list = (struct Node*)malloc(sizeof(struct Node));
     struct Node *_first_node = _list_create();
+    _list_load(&_first_node);
 
     _menu_show(&_first_node);
 
     // data for testing the save and load funtions
+    /*
     struct Personne p;
     
     strcpy(p.nom, "EL BAGHDADI");
@@ -55,4 +57,5 @@ void main()
     _list_show(_first_node);
 
     printf("Log: End of main function\n");
+    */
 }

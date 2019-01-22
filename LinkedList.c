@@ -120,7 +120,7 @@ void _list_save(struct Node *_first)
 	}while(ptr != NULL);
 
 	fclose(file);
-	free(file);
+	//free(file);
 }
 
 
@@ -170,7 +170,17 @@ void _list_load(struct Node **_first)
 
 }
 
-void _list_update(struct Node *_first, struct Node *_old_data, struct Node *_new_data)
+void _list_update(struct Node *_first, struct Node *_old_data, struct Personne *_new_data)
 {
-  
+  struct Node *ptr = _first;
+
+  while((ptr != _old_data) && (ptr != NULL))
+  {
+    ptr = ptr->next;
+  }
+
+  if (ptr == _old_data)
+  {
+    _old_data->data = _new_data;
+  }
 }

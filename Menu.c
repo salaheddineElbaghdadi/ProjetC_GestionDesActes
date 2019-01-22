@@ -4,16 +4,20 @@
 #include "Menu.h"
 #include "LinkedList.h"
 
+
+
 // Prototypes
 void _menu_ajouter_personne(struct Node*);
 void _menu_supprimer_personne(struct Node**);
 void _menu_consulter(struct Node*);
 void _menu_modifier(struct Node*);
+void _menu_sauvegarder(struct Node*);
+int _menu_quiter(struct Node*);
 
 void _menu_show(struct Node **_first_node)
 {
     int input;
-
+    _data_saved = 1;
     do
     {   
         system(CLEAR_SCREEN);
@@ -71,10 +75,10 @@ void _menu_show(struct Node **_first_node)
 
                 break;
             case SAUVEGADER:
-
+                _menu_sauvegarder(*_first_node);
                 break;
             case QUITER:
-
+                input = _menu_quiter(*_first_node);
                 break;
         }
 
@@ -107,6 +111,7 @@ void _menu_ajouter_personne(struct Node *_first_node)
     }
 
     _list_add(_first_node, _new_data);
+    _data_saved = 0;
 }
 
 void _menu_supprimer_personne(struct Node **_first_node)
@@ -117,6 +122,7 @@ void _menu_supprimer_personne(struct Node **_first_node)
 
     struct Node *data = _list_search_by_id(*_first_node, id);
     _list_delete(_first_node, data);
+    _data_saved = 0;
 }
 
 void _menu_modifier(struct Node *_first_node)
@@ -158,6 +164,8 @@ void _menu_modifier(struct Node *_first_node)
         }
 
         // Ici: modifier les donnees de la personne dans la list
+        _list_update(_first_node, data, _new_data);
+        _data_saved = 0;
     }
 
 }
@@ -168,4 +176,48 @@ void _menu_consulter(struct Node *_first_node)
     _list_show(_first_node);
     getchar();
     getchar();
+}
+
+void _menu_sauvegarder(struct Node *_first_node)
+{
+    _list_save(_first_node);
+    _data_saved = 1;
+}
+
+int _menu_quiter(struct Node *_first_node)
+{
+    if (_data_saved == 1)
+    {
+        return QUITER;
+    }
+    else
+    {
+        int choix;
+        printf("Les donnees ne sans pas enregistrees\n");
+        printf("voulez enregister les donnees avant de quiter?\n");
+        printf("    %d. Oui", OUI);
+        printf("    %d. Nom", NON);
+        printf("    %d. Annuler\n", ANNULER);
+        printf("    >>> ");
+        scanf("%d", &choix);
+        
+        if (choix == OUI)
+        {
+            _list_save(_first_node);
+            return QUITER;
+        }
+        else if (choix == NON)
+        {
+            return QUITER;
+        }
+        else if (choix == ANNULER)
+        {
+            return 0;
+        }
+        else
+        {
+            printf("Choix non valide");
+            return 0;
+        }
+    }
 }

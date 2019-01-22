@@ -16,6 +16,9 @@
 #endif
 
 // Menu macros
+#define OUI 1
+#define NON 2
+#define ANNULER 3
 #define AJOUTER 1
 #define SUPPRIMER 2
 #define MODIFIER 3
