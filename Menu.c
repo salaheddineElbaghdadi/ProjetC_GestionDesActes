@@ -117,13 +117,48 @@ void _menu_supprimer_personne(struct Node **_first_node)
 
     struct Node *data = _list_search_by_id(*_first_node, id);
     _list_delete(_first_node, data);
-
-    // Chercher une personne par identifiant
-    // Supprier la personne
 }
 
 void _menu_modifier(struct Node *_first_node)
 {
+    int id;
+    printf("Identifiant de la personne a modifier: ");
+    scanf("%d", &id);
+
+    struct Node *data = _list_search_by_id(_first_node, id);
+
+    if (data == NULL)
+    {
+        printf("Erreur pas de personne avec l'id %d", id);
+        getchar();
+        getchar();
+    }
+    else
+    {
+        struct Personne *_new_data = (struct Personne *)malloc(sizeof(struct Personne));
+        char sexe[10];
+        
+        printf("Nom: ");
+        scanf("%s", _new_data->nom);
+        printf("Prenom: ");
+        scanf("%s", _new_data->prenom);
+        printf("Identifiant: ");
+        scanf("%d", &_new_data->identifiant);
+        printf("Date de naissance (jj/mm/aaaa): ");
+        scanf("%d/%d/%d", &_new_data->dateDeNaissance.jour, &_new_data->dateDeNaissance.mois, &_new_data->dateDeNaissance.annee);
+        printf("Sexe: ");
+        scanf("%s", sexe);
+        printf("Nombre d'enfants: ");
+        scanf("%d", &_new_data->nombreEnfants);
+
+        for (int i = 0; i < _new_data->nombreEnfants; i++)
+        {
+            printf("Identifiant de l'enfant $d: ", i);
+            scanf("%d", &_new_data->enfants[i]);
+        }
+
+        // Ici: modifier les donnees de la personne dans la list
+    }
 
 }
 

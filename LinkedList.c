@@ -169,3 +169,8 @@ void _list_load(struct Node **_first)
   }
 
 }
+
+void _list_update(struct Node *_first, struct Node *_old_data, struct Node *_new_data)
+{
+  
+}
