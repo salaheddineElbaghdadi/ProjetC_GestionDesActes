@@ -1,6 +1,6 @@
 
-main: main.o Personne.o LinkedList.o
-	gcc -o main main.o LinkedList.o Personne.o
+#main: main.o Personne.o LinkedList.o Menu.o
+#	gcc main.o LinkedList.o Personne.o -o main
 
 main.o:
 	gcc -c main.c
@@ -10,3 +10,9 @@ Personne.o:
 
 LinkedList.o:
 	gcc -c LinkedList.c
+
+Menu.o:
+	gcc -c Menu.c
+
+main: main.o LinkedList.o Personne.o Menu.o
+	gcc main.o LinkedList.o Personne.o Menu.o -o main

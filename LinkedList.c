@@ -27,27 +27,16 @@ void _list_add(struct Node *_first,struct Personne *new_data)
     // When ptr->next == NULL
     if (ptr->data == NULL) // if the first ptr point to first and there is still no data
     {
-      printf("if\n");
-      //ptr->data = (struct Personne*)malloc(sizeof(struct Personne));
-      printf("in data\n");
       ptr->data = new_data;
-      printf("after data\n");
       ptr->next = NULL;
-      printf("after next\n");
     }
     else // if there is data where ptr in pointing
     {
-      printf("else\n");
       ptr->next = (struct Node*)malloc(sizeof(struct Node));
       ptr->next->data = (struct Personne *)malloc(sizeof(struct Personne));
       ptr->next->data = new_data;
       ptr->next->next = NULL;
     }
-
-
-    //printf("%d\n", ptr->next->data->Identifiant);
-
-    printf("Log: added to the list\n");
 }
 
 
@@ -58,12 +47,14 @@ void _list_delete(struct Node **_first, struct Node *_node)
   // First in the list
   if (_ptr == *_first)
   {
+    printf("Log: if\n");
     *_first = _ptr->next;
     free(_ptr);
   }
   // Last in the list
   else if (_ptr->next == NULL)
   {
+    printf("Log: else if\n");
     struct Node *_index = *_first;
     while (_index->next != _node)
     {
@@ -75,6 +66,7 @@ void _list_delete(struct Node **_first, struct Node *_node)
   // In the middle of the liste
   else
   {
+    printf("Log: else\n");
     struct Node *_point = *_first;
     while (_point->next != _node)
     {
@@ -118,22 +110,17 @@ void _list_save(struct Node *_first)
 	// Writing on the file
 	do
 	{
-		printf("Log: entered while loop\n");
 		// Check if the data pointer is pointing on a struct and is not pointing on NULL
 		if (ptr->data != NULL)
 		{
 			fwrite(ptr->data, sizeof(struct Personne), 1, file);
-			printf("Log: data not null\n");
 		}
 		
     ptr = ptr->next;
-    printf("after ptr->next in while loop\n");
 	}while(ptr != NULL);
 
 	fclose(file);
 	free(file);
-
-	printf("Log: saved to file\n");
 }
 
 
@@ -142,11 +129,12 @@ struct Node *_list_search_by_id(struct Node *_first, int _id)
 {
   struct Node *_ptr = _first;
 
-	while( (_ptr != NULL) && (_id != _ptr->data->identifiant != _id) )
+	while( (_ptr != NULL) && (_id != _ptr->data->identifiant) )
 	{
 		_ptr = _ptr->next;
 	}
 
+  printf("Log: _list_search_by_id before if");
 	if ( (_ptr == NULL) || (_id != _ptr->data->identifiant) )
 	{
 	  return NULL;
