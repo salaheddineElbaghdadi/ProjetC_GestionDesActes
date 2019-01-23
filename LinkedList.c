@@ -145,7 +145,46 @@ struct Node *_list_search_by_id(struct Node *_first, int _id)
 	}
 }
 
+void _list_sort_by_id(struct Node *_first)
+{
+  struct Node *_ptr = _first;
+  struct Node *_data;
+  int minId;
 
+  while (_first->next != NULL)
+  {
+    _ptr = _first;
+    minId = _first->data->identifiant;
+    _data = _first;
+
+    while (_ptr != NULL)
+    {
+      if (_ptr->data->identifiant < minId)
+      {
+        minId = _ptr->data->identifiant;
+        _data = _ptr;
+      }
+
+      _ptr = _ptr->next;
+    }
+
+    if (_first->data->identifiant != minId)
+    {
+      struct Personne *temp;
+      temp = _data->data;
+      _data->data = _first->data;
+      _first->data = temp;
+
+    }
+    
+    _first = _first->next;
+  }
+}
+
+void _list_sort_by_name(struct Node *_first)
+{
+
+}
 
 
 // Load list from file

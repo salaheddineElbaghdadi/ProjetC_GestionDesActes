@@ -13,6 +13,8 @@ void _menu_consulter(struct Node*);
 void _menu_modifier(struct Node*);
 void _menu_sauvegarder(struct Node*);
 int _menu_quiter(struct Node*);
+void _menu_trier_liste_par_identifiants(struct Node*);
+void _menu_trier_liste_par_noms(struct Node*);
 
 void _menu_show(struct Node **_first_node)
 {
@@ -33,7 +35,8 @@ void _menu_show(struct Node **_first_node)
         printf("%d. Consulter la liste des personnes\n", CONSULTER);
         printf("%d. Chercher une personne par son Nom et Prenom\n", CHERCHER_PERSONNE_PAR_NOM_PRENOM);
         printf("%d. Chercher une personne par son identifiant\n", CHERCHER_PERSONNE_PAR_IDENTIFIANT);
-        printf("%d. Trier la liste des personne\n", TRIER_LISTE_PERSSONE);
+        printf("%d. Trier la liste des personne par identifiants\n", TRIER_LISTE_PERSONNE_PAR_IDENTIFIANT);
+        printf("%d. Trier la liste des personne par noms\n", TRIER_LISTE_PERSONNE_PAR_NOM);
         printf("%d. Imprimer les donnees d'une personne\n", IMPRIMER);
         printf("%d. Afficher les information sur les enfants d'une personne\n", AFFICHER_INFO_ENFANT);
         printf("%d. Sauvegarder\n", SAUVEGADER);
@@ -56,16 +59,20 @@ void _menu_show(struct Node **_first_node)
                 _menu_modifier(*_first_node);
                 break;
             case CONSULTER: 
-                printf("Consulater la liste des personnes: ");
+                printf("Consulater la liste des personnes: \n");
                 _menu_consulter(*_first_node);
                 break;
             case CHERCHER_PERSONNE_PAR_NOM_PRENOM:
 
                 break;
             case CHERCHER_PERSONNE_PAR_IDENTIFIANT:
-
+                
                 break;
-            case TRIER_LISTE_PERSSONE:
+            case TRIER_LISTE_PERSONNE_PAR_IDENTIFIANT:
+                printf("Trier la list par identifiants\n");
+                _menu_trier_liste_par_identifiants(*_first_node);
+                break;
+            case TRIER_LISTE_PERSONNE_PAR_NOM:
 
                 break;
             case IMPRIMER:
@@ -176,6 +183,16 @@ void _menu_consulter(struct Node *_first_node)
     _list_show(_first_node);
     getchar();
     getchar();
+}
+
+void _menu_trier_liste_par_identifiants(struct Node *_first_node)
+{
+    _list_sort_by_id(_first_node);
+}
+
+void _menu_trier_liste_par_noms(struct Node *_first_node)
+{
+
 }
 
 void _menu_sauvegarder(struct Node *_first_node)
