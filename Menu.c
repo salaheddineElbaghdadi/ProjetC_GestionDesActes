@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "const.h"
 #include "Menu.h"
 #include "LinkedList.h"
+#include "Personne.h"
 
 
 
@@ -15,6 +17,7 @@ void _menu_sauvegarder(struct Node*);
 int _menu_quiter(struct Node*);
 void _menu_trier_liste_par_identifiants(struct Node*);
 void _menu_trier_liste_par_noms(struct Node*);
+void _menu_imprimer_info_personne(struct Node*);
 
 void _menu_show(struct Node **_first_node)
 {
@@ -77,7 +80,8 @@ void _menu_show(struct Node **_first_node)
                 _menu_trier_liste_par_noms(*_first_node);
                 break;
             case IMPRIMER:
-
+                printf("Info personne: \n");
+                _menu_imprimer_info_personne(*_first_node);
                 break;
             case AFFICHER_INFO_ENFANT:
 
@@ -97,7 +101,7 @@ void _menu_show(struct Node **_first_node)
 void _menu_ajouter_personne(struct Node *_first_node)
 {
     struct Personne *_new_data = (struct Personne *)malloc(sizeof(struct Personne));
-    char sexe[10];
+    int sexe;
     
     printf("Nom: ");
     scanf("%s", _new_data->nom);
@@ -107,8 +111,8 @@ void _menu_ajouter_personne(struct Node *_first_node)
     scanf("%d", &_new_data->identifiant);
     printf("Date de naissance (jj/mm/aaaa): ");
     scanf("%d/%d/%d", &_new_data->dateDeNaissance.jour, &_new_data->dateDeNaissance.mois, &_new_data->dateDeNaissance.annee);
-    printf("Sexe: ");
-    scanf("%s", sexe);
+    printf("Sexe (0. Homme/1. Femme): ");
+    scanf("%d", sexe);
     printf("Nombre d'enfants: ");
     scanf("%d", &_new_data->nombreEnfants);
 
@@ -117,6 +121,16 @@ void _menu_ajouter_personne(struct Node *_first_node)
         printf("Identifiant de l'enfant $d: ", i);
         scanf("%d", &_new_data->enfants[i]);
     }
+    
+    if (sexe == 0)
+    {
+        _new_data->sexe = Homme;
+    }
+    else
+    {
+        _new_data->sexe = Femme;
+    }
+
 
     _list_add(_first_node, _new_data);
     _data_saved = 0;
@@ -171,6 +185,15 @@ void _menu_modifier(struct Node *_first_node)
             scanf("%d", &_new_data->enfants[i]);
         }
 
+        if (sexe == 0)
+        {
+            _new_data->sexe = Homme;
+        }
+        else
+        {
+            _new_data->sexe = Femme;
+        }   
+
         // Ici: modifier les donnees de la personne dans la list
         _list_update(_first_node, data, _new_data);
         _data_saved = 0;
@@ -194,6 +217,36 @@ void _menu_trier_liste_par_identifiants(struct Node *_first_node)
 void _menu_trier_liste_par_noms(struct Node *_first_node)
 {
     _list_sort_by_name(_first_node);
+}
+
+void _menu_imprimer_info_personne(struct Node *_first_node)
+{
+    int id;
+    struct Node *_data;
+    printf("Donnez l'identifiant de la personne: ");
+    scanf("%d", &id);
+
+    _data = _list_search_by_id(_first_node, id);
+
+    if (_data == NULL)
+    {
+        printf("Erreur: pas de personne avec l'identifiant: %d", id);
+    }
+    else
+    {
+        system(CLEAR_SCREEN);
+        printf("============================================================\n");
+        printf("|  Nom:                 %s\n", _data->data->nom);
+        printf("|  Prenom:              %s\n", _data->data->prenom);
+        printf("|  Identifiant:         %s\n", _data->data->identifiant);
+        printf("|  Date de naissance:   %d/%d/%d\n", _data->data->dateDeNaissance.jour
+                                                     ,_data->data->dateDeNaissance.mois
+                                                     ,_data->data->dateDeNaissance.annee);
+    }
+
+    getchar();
+    getchar();
+
 }
 
 void _menu_sauvegarder(struct Node *_first_node)

@@ -135,7 +135,6 @@ struct Node *_list_search_by_id(struct Node *_first, int _id)
 		_ptr = _ptr->next;
 	}
 
-  printf("Log: _list_search_by_id before if");
 	if ( (_ptr == NULL) || (_id != _ptr->data->identifiant) )
 	{
 	  return NULL;
@@ -193,7 +192,7 @@ void _list_sort_by_name(struct Node *_first)
   {
     _ptr = _first;
     _name = _ptr->data->nom;
-    _last_name = _ptr->data->prenom;
+    _last_name = _ptr->data->prenom;;
     _data = _first;
 
     while (_ptr != NULL)
