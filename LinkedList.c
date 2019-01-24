@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdlib.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Personne.h"
 #include "const.h"
@@ -183,7 +184,49 @@ void _list_sort_by_id(struct Node *_first)
 
 void _list_sort_by_name(struct Node *_first)
 {
+  struct Node *_ptr = _first;
+  struct Node *_data;
+  char *_name;
+  char *_last_name;
 
+  while (_first->next != NULL)
+  {
+    _ptr = _first;
+    _name = _ptr->data->nom;
+    _last_name = _ptr->data->prenom;
+    _data = _first;
+
+    while (_ptr != NULL)
+    {
+      if (strcmp(_name, _ptr->data->nom) > 0)
+      {
+        _name = _ptr->data->nom;
+        _last_name = _ptr->data->prenom;
+        _data = _ptr;
+      }
+      else if (strcmp(_name, _ptr->data->nom) == 0)
+      {
+        if (strcmp(_last_name, _ptr->data->prenom) > 0)
+        {
+          _name = _ptr->data->nom;
+          _last_name = _ptr->data->prenom;
+          _data = _ptr;
+        }
+      }
+
+      _ptr = _ptr->next;
+    }
+
+    if ((_first->data->nom != _name) || (_first->data->prenom != _last_name))
+    {
+      struct Personne *temp;
+      temp = _data->data;
+      _data->data = _first->data;
+      _first->data = temp;
+    }
+    
+    _first = _first->next;
+  }
 }
 
 

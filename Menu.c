@@ -69,11 +69,12 @@ void _menu_show(struct Node **_first_node)
                 
                 break;
             case TRIER_LISTE_PERSONNE_PAR_IDENTIFIANT:
-                printf("Trier la list par identifiants\n");
+                printf("Trier la list par identifiants: \n");
                 _menu_trier_liste_par_identifiants(*_first_node);
                 break;
             case TRIER_LISTE_PERSONNE_PAR_NOM:
-
+                printf("Trier la list par noms: \n");
+                _menu_trier_liste_par_noms(*_first_node);
                 break;
             case IMPRIMER:
 
@@ -192,7 +193,7 @@ void _menu_trier_liste_par_identifiants(struct Node *_first_node)
 
 void _menu_trier_liste_par_noms(struct Node *_first_node)
 {
-
+    _list_sort_by_name(_first_node);
 }
 
 void _menu_sauvegarder(struct Node *_first_node)
