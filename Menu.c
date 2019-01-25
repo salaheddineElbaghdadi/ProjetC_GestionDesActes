@@ -12,6 +12,7 @@
 void _menu_ajouter_personne(struct Node*);
 void _menu_supprimer_personne(struct Node**);
 void _menu_consulter(struct Node*);
+void _menu_chercher_par_nom_prenom(struct Node*);
 void _menu_modifier(struct Node*);
 void _menu_sauvegarder(struct Node*);
 int _menu_quiter(struct Node*);
@@ -66,7 +67,8 @@ void _menu_show(struct Node **_first_node)
                 _menu_consulter(*_first_node);
                 break;
             case CHERCHER_PERSONNE_PAR_NOM_PRENOM:
-
+                printf("Recherche de personne par nom et prenom: \n");
+                _menu_chercher_par_nom_prenom(*_first_node);
                 break;
             case CHERCHER_PERSONNE_PAR_IDENTIFIANT:
                 
@@ -207,6 +209,65 @@ void _menu_consulter(struct Node *_first_node)
     _list_show(_first_node);
     getchar();
     getchar();
+}
+
+void _menu_chercher_par_nom_prenom(struct Node *_first)
+{
+    struct Node *_nodes;
+    int choix;
+    char nom[NAME_SIZE];
+    char prenom[NAME_SIZE];
+
+    printf("%d. Nom   %d. Prenom   %d. Nom et prenom\n", NOM, PRENOM, NOM_PRENOM);
+    printf(">>> ");
+    scanf("%d", &choix);
+
+
+    switch (choix)
+    {
+        case NOM:
+            printf("Donnez le nom: ");
+            scanf("%s", nom);
+
+            // search by last name
+            _nodes = _list_search_by_last_name(_first, nom);
+            _list_show(_nodes);
+
+            // wait for input
+            getchar();
+            getchar();
+            break;
+
+        case PRENOM:
+            printf("Donnez le prenom: ");
+            scanf("%s", prenom);
+
+            // search by first name
+            _nodes = _list_search_by_first_name(_first, prenom);
+            _list_show(_nodes);
+
+            // wait for input
+            getchar();
+            getchar();
+            break;
+
+        case NOM_PRENOM:
+            printf("Donnez le nom: ");
+            scanf("%s", nom);
+            printf("Donnew le prenom: ");
+            scanf("%s", prenom);
+            
+            // search by first and last name
+            struct Node *_nodes_by_first_name = _list_search_by_first_name(_first, prenom);
+            struct Node *_nodes_by_last_name = _list_search_by_last_name(_first, nom);
+            _nodes = _list_intersect(_nodes_by_first_name, _nodes_by_last_name);
+            _list_show(_nodes);
+
+            // wait for input
+            getchar();
+            getchar();
+            break;
+    }
 }
 
 void _menu_trier_liste_par_identifiants(struct Node *_first_node)

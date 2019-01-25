@@ -22,6 +22,9 @@ struct Node *_list_search_by_id(struct Node*, int);
 void _list_sort_by_id(struct Node*);
 void _list_sort_by_name(struct Node*);
 void _list_update(struct Node*, struct Node*, struct Personne*);
+struct Node *_list_search_by_first_name(struct Node*, char*);
+struct Node *_list_search_by_last_name(struct Node*, char*);
+struct Node *_list_intersect(struct Node*, struct Node*);
 
 
 #endif

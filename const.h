@@ -19,6 +19,11 @@
 #define OUI 1
 #define NON 2
 #define ANNULER 3
+
+#define NOM 1
+#define PRENOM 2
+#define NOM_PRENOM 3
+
 #define AJOUTER 1
 #define SUPPRIMER 2
 #define MODIFIER 3

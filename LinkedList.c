@@ -267,37 +267,74 @@ void _list_update(struct Node *_first, struct Node *_old_data, struct Personne *
 }
 
 
-struct Node *_list_search_by_first_name(struct Node *_first, char _first_name)
+struct Node *_list_search_by_first_name(struct Node *_first, char *_first_name)
 {
+  struct Node *_nodes = _list_create();
   struct Node *_ptr = _first;
+
 	while (_ptr != NULL)
 	{
-	 if (strcmp(_first_name, _ptr->data->prenom) != 0)
-	{
-		_ptr = _ptr->next;
-	}
-	else
-	{
-		return _ptr;
-	}
+	  if (strcmp(_first_name, _ptr->data->prenom) != 0)
+	  {
+		  _ptr = _ptr->next;
+	  }
+	  else
+	  {
+      _list_add(_nodes, _ptr->data);
+      _ptr = _ptr->next;
+	  	//return _ptr;
+	  }
   }
-	return NULL;
+
+  return _nodes;
+  
 }
 
 
-struct Node *_list_search_by_last_name(struct Node *_first, char _last_name)
+struct Node *_list_search_by_last_name(struct Node *_first, char *_last_name)
 {
+  struct Node *_nodes = _list_create();
   struct Node *_ptr = _first;
+
 	while (_ptr != NULL)
 	{
-	 if (strcmp(_last_name, _ptr->data->nom) != 0)
-	{
-		_ptr = _ptr->next;
-	}
-	else
-	{
-		return _ptr;
-	}
+	  if (strcmp(_last_name, _ptr->data->nom) != 0)
+	  {
+		  _ptr = _ptr->next;
+	  }
+	  else
+	  {
+      _list_add(_nodes, _ptr->data);
+      _ptr = _ptr->next;
+	  	//return _ptr;
+	  }
   }
-	return NULL;
+
+  return _nodes;
+}
+
+struct Node *_list_intersect(struct Node *_first_one, struct Node *_first_two)
+{
+  struct Node *_intersection = _list_create();
+  struct Node *_ptr_one = _first_one;
+  struct Node *_ptr_two = _first_two;
+
+  while (_ptr_one != NULL)
+  {
+    _ptr_two = _first_two;
+
+    while (_ptr_two != NULL)
+    {
+      if (_ptr_two->data == _ptr_one->data)
+      {
+        _list_add(_intersection, _ptr_two->data);
+      }
+      _ptr_two = _ptr_two->next;
+    }
+    
+    _ptr_one = _ptr_one->next;
+  }
+
+  return _intersection;
+  
 }
