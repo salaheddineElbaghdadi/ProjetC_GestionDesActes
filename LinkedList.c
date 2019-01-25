@@ -116,7 +116,7 @@ void _list_save(struct Node *_first)
 		{
 			fwrite(ptr->data, sizeof(struct Personne), 1, file);
 		}
-		
+
     ptr = ptr->next;
 	}while(ptr != NULL);
 
@@ -176,7 +176,7 @@ void _list_sort_by_id(struct Node *_first)
       _first->data = temp;
 
     }
-    
+
     _first = _first->next;
   }
 }
@@ -223,7 +223,7 @@ void _list_sort_by_name(struct Node *_first)
       _data->data = _first->data;
       _first->data = temp;
     }
-    
+
     _first = _first->next;
   }
 }
@@ -236,14 +236,14 @@ void _list_load(struct Node **_first)
   file = fopen(FILE_NAME, "rb");
 
   *_first = _list_create();
-  
+
   //struct Node *_new_node = (struct Node*)malloc(sizeof(struct Node));
   struct Personne *_new_data = (struct Personne*)malloc(sizeof(struct Personne));
-  
+
   if (file != NULL)
   {
     while(fread(_new_data, sizeof(struct Personne), 1, file) != 0)
-    { 
+    {
       _list_add(*_first, _new_data);
       _new_data = (struct Personne*)malloc(sizeof(struct Personne));
     }
@@ -264,4 +264,40 @@ void _list_update(struct Node *_first, struct Node *_old_data, struct Personne *
   {
     _old_data->data = _new_data;
   }
+}
+
+
+struct Node *_list_search_by_first_name(struct Node *_first, char _first_name)
+{
+  struct Node *_ptr = _first;
+	while (_ptr != NULL)
+	{
+	 if (strcmp(_first_name, _ptr->data->prenom) != 0)
+	{
+		_ptr = _ptr->next;
+	}
+	else
+	{
+		return _ptr;
+	}
+  }
+	return NULL;
+}
+
+
+struct Node *_list_search_by_last_name(struct Node *_first, char _last_name)
+{
+  struct Node *_ptr = _first;
+	while (_ptr != NULL)
+	{
+	 if (strcmp(_last_name, _ptr->data->nom) != 0)
+	{
+		_ptr = _ptr->next;
+	}
+	else
+	{
+		return _ptr;
+	}
+  }
+	return NULL;
 }
