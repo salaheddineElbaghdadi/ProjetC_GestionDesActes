@@ -13,6 +13,7 @@ void _menu_ajouter_personne(struct Node*);
 void _menu_supprimer_personne(struct Node**);
 void _menu_consulter(struct Node*);
 void _menu_chercher_par_nom_prenom(struct Node*);
+void _menu_chercher_par_identifiant(struct Node*);
 void _menu_modifier(struct Node*);
 void _menu_sauvegarder(struct Node*);
 int _menu_quiter(struct Node*);
@@ -71,7 +72,8 @@ void _menu_show(struct Node **_first_node)
                 _menu_chercher_par_nom_prenom(*_first_node);
                 break;
             case CHERCHER_PERSONNE_PAR_IDENTIFIANT:
-                
+                printf("Recherche par identifiant: \n");
+                _menu_chercher_par_identifiant(*_first_node);
                 break;
             case TRIER_LISTE_PERSONNE_PAR_IDENTIFIANT:
                 printf("Trier la list par identifiants: \n");
@@ -268,6 +270,19 @@ void _menu_chercher_par_nom_prenom(struct Node *_first)
             getchar();
             break;
     }
+}
+
+void _menu_chercher_par_identifiant(struct Node *_first)
+{
+    int id;
+    printf("Donner l'identifiant: ");
+    scanf("%d", &id);
+
+    struct Node *_data = _list_search_by_id(_first, id);
+    _menu_imprimer_info_personne(_data);
+
+    getchar();
+    getchar();
 }
 
 void _menu_trier_liste_par_identifiants(struct Node *_first_node)
