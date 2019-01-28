@@ -11,6 +11,13 @@ struct Date
 	int annee;
 } Date;
 
+// Definition Lieu
+struct Lieu
+{
+	char pays[NAME_SIZE];
+	char ville[NAME_SIZE];
+};
+
 
 // Definition sex
 enum Sexe { Homme, Femme }  Sexe;
@@ -22,7 +29,11 @@ struct Personne
 	char prenom[NAME_SIZE];
 	enum Sexe sexe;
 	struct Date dateDeNaissance;
+	struct Lieu	lieuDeNaissance;
 	int identifiant;
+
+	struct Personne *pere;
+	struct Personne *mere;
 
 	// Ici ajouter nombre d'enfants et leurs identifiants
 	int nombreEnfants;

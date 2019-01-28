@@ -338,3 +338,29 @@ struct Node *_list_intersect(struct Node *_first_one, struct Node *_first_two)
   return _intersection;
   
 }
+
+struct Node *_list_show_and_select(struct Node *_first)
+{
+  struct Node *_ptr = _first;
+  int selection = 1;
+  int currentSelection = 1;
+  
+  while (_ptr != NULL)
+  {
+    printf("%d. %s  %s  id: %d\n", currentSelection);
+    currentSelection++;
+    _ptr = _ptr->next;
+  }
+
+  printf("select: ");
+  scanf("%d", &selection);
+  
+  currentSelection = 1;
+  while (_ptr != NULL && currentSelection < selection)
+  {
+    currentSelection++;
+    _ptr = _ptr->next;
+  }
+
+  return _ptr;
+}

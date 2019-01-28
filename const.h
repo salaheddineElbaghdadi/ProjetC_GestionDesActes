@@ -20,9 +20,16 @@
 #define NON 2
 #define ANNULER 3
 
+#define KEY_UP 65
+#define KEY_DOWN 66
+#define KEY_ENTER 10
+
 #define NOM 1
 #define PRENOM 2
 #define NOM_PRENOM 3
+
+#define FEMME 0
+#define HOMME 1
 
 #define AJOUTER 1
 #define SUPPRIMER 2

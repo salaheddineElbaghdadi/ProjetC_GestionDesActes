@@ -25,6 +25,7 @@ void _list_update(struct Node*, struct Node*, struct Personne*);
 struct Node *_list_search_by_first_name(struct Node*, char*);
 struct Node *_list_search_by_last_name(struct Node*, char*);
 struct Node *_list_intersect(struct Node*, struct Node*);
+struct Node *_list_show_and_select(struct Node*);
 
 
 #endif

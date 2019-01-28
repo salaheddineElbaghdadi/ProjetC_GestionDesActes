@@ -49,6 +49,7 @@ void _menu_show(struct Node **_first_node)
         printf(">>> ");
         scanf("%d", &input);
 
+
         switch (input)
         {
             case AJOUTER:
