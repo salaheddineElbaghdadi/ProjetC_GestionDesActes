@@ -3,6 +3,7 @@
 
 #define NAME_SIZE 30 
 #define IDENTIFIANT_SIZE 5
+#define CIN_SIZE 10
 #define NOMBRE_ENFANTS_MAX 20
 #define FILE_NAME "fichier.bin"
 

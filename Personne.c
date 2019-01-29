@@ -19,6 +19,9 @@ struct Personne *_personne_read(struct Node *_first)
     printf("Prenom: ");
     scanf("%s", _new_data->prenom);
 
+    printf("CIN: ");
+    scanf("%s", _new_data->cin);
+
     printf("Sexe (%d. FEMME  %d. HOMME): ", FEMME, HOMME);
     int sexe;
     scanf("%d", &sexe);

@@ -147,6 +147,25 @@ struct Node *_list_search_by_id(struct Node *_first, int _id)
 	}
 }
 
+struct Node *_list_search_by_cin(struct Node *_first, char *_cin)
+{
+  struct Node *_ptr = _first;
+
+	while( (_ptr != NULL) && strcmp(_cin,_ptr->data->cin) != 0)
+	{
+		_ptr = _ptr->next;
+	}
+
+	if ( (_ptr == NULL) || strcmp(_cin,_ptr->data->identifiant) != 0)
+	{
+	  return NULL;
+	}
+	else
+	{
+    return _ptr;
+	}
+}
+
 void _list_sort_by_id(struct Node *_first)
 {
   struct Node *_ptr = _first;
@@ -363,7 +382,7 @@ struct Node *_list_show_and_select(struct Node *_first)
 
   printf("select: ");
   scanf("%d", &selection);
-  
+
   currentSelection = 1;
   _ptr = _first;
   while (_ptr != NULL && currentSelection < selection)

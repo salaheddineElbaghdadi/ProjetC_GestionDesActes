@@ -19,6 +19,7 @@ void _list_save(struct Node*);
 void _list_load(struct Node**);
 struct Node *_list_create();
 struct Node *_list_search_by_id(struct Node*, int);
+struct Node *_list_search_by_cin(struct Node*, char*);
 void _list_sort_by_id(struct Node*);
 void _list_sort_by_name(struct Node*);
 void _list_update(struct Node*, struct Node*, struct Personne*);

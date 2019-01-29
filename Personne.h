@@ -32,6 +32,7 @@ struct Personne
 	struct Date dateDeNaissance;
 	struct Lieu	lieuDeNaissance;
 	int identifiant;
+	char cin[CIN_SIZE];
 
 	struct Personne *pere;
 	struct Personne *mere;
