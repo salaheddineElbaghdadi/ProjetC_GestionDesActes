@@ -1,6 +1,6 @@
 
-#main: main.o Personne.o LinkedList.o Menu.o
-#	gcc main.o LinkedList.o Personne.o -o main
+main: main.o LinkedList.o Personne.o Menu.o
+	gcc main.o LinkedList.o Personne.o Menu.o -o main
 
 main.o:
 	gcc -c main.c
@@ -14,5 +14,5 @@ LinkedList.o:
 Menu.o:
 	gcc -c Menu.c
 
-main: main.o LinkedList.o Personne.o Menu.o
-	gcc main.o LinkedList.o Personne.o Menu.o -o main
+clean:
+	rm *.o

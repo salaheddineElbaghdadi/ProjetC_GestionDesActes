@@ -109,6 +109,8 @@ void _list_save(struct Node *_first)
 	struct Node *ptr = _first;
 
 	// Writing on the file
+  fwrite(&_last_id, sizeof(int), 1, file);    // savind the last id
+
 	do
 	{
 		// Check if the data pointer is pointing on a struct and is not pointing on NULL
@@ -240,8 +242,14 @@ void _list_load(struct Node **_first)
   //struct Node *_new_node = (struct Node*)malloc(sizeof(struct Node));
   struct Personne *_new_data = (struct Personne*)malloc(sizeof(struct Personne));
 
+  
+
   if (file != NULL)
   {
+    if (fread(&_last_id, sizeof(int), 1, file) == 0)
+    {
+      _last_id = 0;
+    }
     while(fread(_new_data, sizeof(struct Personne), 1, file) != 0)
     {
       _list_add(*_first, _new_data);
@@ -345,9 +353,10 @@ struct Node *_list_show_and_select(struct Node *_first)
   int selection = 1;
   int currentSelection = 1;
   
-  while (_ptr != NULL)
+  while (_ptr != NULL && _ptr->data != NULL)
   {
-    printf("%d. %s  %s  id: %d\n", currentSelection);
+    printf("LOG2\n");
+    printf("%d. %s  %s  id: %d\n", currentSelection, _ptr->data->nom, _ptr->data->prenom, _ptr->data->identifiant);
     currentSelection++;
     _ptr = _ptr->next;
   }
@@ -356,6 +365,7 @@ struct Node *_list_show_and_select(struct Node *_first)
   scanf("%d", &selection);
   
   currentSelection = 1;
+  _ptr = _first;
   while (_ptr != NULL && currentSelection < selection)
   {
     currentSelection++;

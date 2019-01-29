@@ -106,7 +106,8 @@ void _menu_show(struct Node **_first_node)
 void _menu_ajouter_personne(struct Node *_first_node)
 {
     struct Personne *_new_data = (struct Personne *)malloc(sizeof(struct Personne));
-    int sexe;
+    //_new_data = _personne_read(_first_node);
+    /*int sexe;
     
     printf("Nom: ");
     scanf("%s", _new_data->nom);
@@ -135,10 +136,13 @@ void _menu_ajouter_personne(struct Node *_first_node)
     {
         _new_data->sexe = Femme;
     }
+    */
 
+   _new_data = _personne_read(_first_node);
 
     _list_add(_first_node, _new_data);
     _data_saved = 0;
+    
 }
 
 void _menu_supprimer_personne(struct Node **_first_node)

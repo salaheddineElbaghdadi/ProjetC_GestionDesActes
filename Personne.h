@@ -2,6 +2,7 @@
 #define PERSONNE_H
 
 #include "const.h"
+#include "LinkedList.h"
 
 // Definition date
 struct Date
@@ -41,7 +42,13 @@ struct Personne
 };
 
 
-// Prototypes
+// Prototype
+struct Personne *_personne_read(struct Node*);
 void _personne_show(struct Personne*);
+struct Personne *_personne_search(struct Node*);
+
+
+// Global variables
+int _last_id;
 
 #endif

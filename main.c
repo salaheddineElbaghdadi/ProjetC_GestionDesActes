@@ -12,7 +12,7 @@ void main()
     struct Node *_first_node = _list_create();
     _list_load(&_first_node);
 
-    _list_show_and_select(_first_node);
+    //_list_show_and_select(_first_node);
 
     _menu_show(&_first_node);
 
