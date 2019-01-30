@@ -9,6 +9,8 @@ struct Personne *_personne_read(struct Node *_first)
 {
     struct Personne *_new_data = (struct Personne*)malloc(sizeof(struct Personne));
     struct Personne *_familly_data = (struct Personne*)malloc(sizeof(struct Personne));
+    _new_data->pere = NULL;
+    _new_data->mere = NULL;
 
     _last_id++;
     _new_data->identifiant = _last_id;
@@ -60,6 +62,7 @@ struct Personne *_personne_read(struct Node *_first)
             _familly_data = _personne_search(_first);
             if (_familly_data == NULL)
             {
+                printf("LOG: NULL\n");
                 printf("Personne non trouvee\n");
                 printf("1.Recommencer la recherche  2.Annuler: ");
                 scanf("%d", &choix2);
@@ -68,6 +71,14 @@ struct Personne *_personne_read(struct Node *_first)
                     goto recherchePere;
                 }
             }
+            else
+            {
+                printf("LOG: NOT NULL\n");
+                _new_data->pere = (struct Personne*)malloc(sizeof(struct Personne));
+                _new_data->pere = _familly_data;
+                _familly_data = NULL;
+            }
+            
         }
         else if (choix == 2)
         {
@@ -85,6 +96,12 @@ struct Personne *_personne_read(struct Node *_first)
                     goto rechercheMere;
                 }
             }
+            else
+            {
+                _new_data->pere = _familly_data;
+                _familly_data = NULL;
+            }
+            
         }
     }
 
@@ -112,7 +129,7 @@ void _personne_show(struct Personne *_personne)
 {
     printf("Nom: %s\n",  _personne->nom);
     printf("Prenom: %s\n", _personne->prenom);
-    printf("Identifiant: %d\n", _personne->identifiant);
+    printf("CIN: %s\n", _personne->cin);
     printf("Date de naissance: %d/%d/%d\n", _personne->dateDeNaissance.jour, 
                                           _personne->dateDeNaissance.jour, 
                                           _personne->dateDeNaissance.mois);
@@ -126,18 +143,27 @@ void _personne_show(struct Personne *_personne)
         printf("Sexe: Femme\n");
     }
     
+    if (_personne->pere != NULL)
+    {
+        printf("Pere: %s %s\n", _personne->pere->nom, _personne->pere->prenom);
+    }
+    if (_personne->mere != NULL)
+    {
+        printf("Mere: %s %s\n", _personne->mere->nom, _personne->mere->prenom);
+    }
+
     printf("Nombre d'enfants: %d\n", _personne->nombreEnfants);
 }
 
 struct Personne *_personne_search(struct Node *_first)
 {
     int choix;
-    int id;
+    char cin[CIN_SIZE];
     char nom[NAME_SIZE];
     char prenom[NAME_SIZE];
     struct Node *_node = (struct Node*)malloc(sizeof(struct Node));
 
-    printf("Chercher par 1. Nom/Prenom  2. Identifiant: ");
+    printf("Chercher par 1. Nom/Prenom  2. CIN: ");
     scanf("%d", &choix);
     if (choix == 1)
     {
@@ -148,14 +174,23 @@ struct Personne *_personne_search(struct Node *_first)
         struct Node *_nodes_by_first_name = _list_search_by_first_name(_first, prenom);
         struct Node *_nodes_by_last_name = _list_search_by_last_name(_first, nom);
         struct Node *_nodes = _list_intersect(_nodes_by_first_name, _nodes_by_last_name);
-        printf("LOG\n");
+
+        if (_nodes == NULL)
+        {
+            return NULL;
+        }
         _node = _list_show_and_select(_nodes);
     }
     else if (choix == 2)
     {
-        printf("Identifiant: ");
-        scanf("%d", &id);
-        _node = _list_search_by_id(_first, id);
+        printf("cin: ");
+        scanf("%s", cin);
+        _node = _list_search_by_cin(_first, cin);
+
+        if (_node == NULL)
+        {
+            return NULL;
+        }
     }
     
 

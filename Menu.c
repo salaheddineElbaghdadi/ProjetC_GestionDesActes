@@ -302,13 +302,25 @@ void _menu_trier_liste_par_noms(struct Node *_first_node)
 
 void _menu_imprimer_info_personne(struct Node *_first_node)
 {
-    int id;
+
+    char cin[CIN_SIZE];
     struct Node *_data;
-    printf("Donnez l'identifiant de la personne: ");
-    scanf("%d", &id);
+    printf("Donnez le cin de la personne: ");
+    scanf("%s", cin);
 
-    _data = _list_search_by_id(_first_node, id);
+    _data = _list_search_by_cin(_first_node, cin);
+    if (_data != NULL)
+    {
+        printf("LOG: data not null\n");
+        _personne_show(_data->data);
+    }
+    else
+    {
+        printf("Personne non trouvee.\n");
+    }
+    
 
+    /*
     if (_data == NULL)
     {
         printf("Erreur: pas de personne avec l'identifiant: %d", id);
@@ -324,7 +336,7 @@ void _menu_imprimer_info_personne(struct Node *_first_node)
                                                      ,_data->data->dateDeNaissance.mois
                                                      ,_data->data->dateDeNaissance.annee);
     }
-
+    */
     getchar();
     getchar();
 

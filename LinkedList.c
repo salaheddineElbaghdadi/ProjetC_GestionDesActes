@@ -55,7 +55,6 @@ void _list_delete(struct Node **_first, struct Node *_node)
   // Last in the list
   else if (_ptr->next == NULL)
   {
-    printf("Log: else if\n");
     struct Node *_index = *_first;
     while (_index->next != _node)
     {
@@ -67,7 +66,6 @@ void _list_delete(struct Node **_first, struct Node *_node)
   // In the middle of the liste
   else
   {
-    printf("Log: else\n");
     struct Node *_point = *_first;
     while (_point->next != _node)
     {
@@ -151,12 +149,20 @@ struct Node *_list_search_by_cin(struct Node *_first, char *_cin)
 {
   struct Node *_ptr = _first;
 
-	while( (_ptr != NULL) && strcmp(_cin,_ptr->data->cin) != 0)
+	while(_ptr != NULL)
 	{
-		_ptr = _ptr->next;
+    if (strcmp(_cin, _ptr->data->cin) != 0)
+    {
+		  _ptr = _ptr->next;
+    }
+    else
+    {
+      break;
+    }
+    
 	}
 
-	if ( (_ptr == NULL) || strcmp(_cin,_ptr->data->identifiant) != 0)
+	if (_ptr == NULL)
 	{
 	  return NULL;
 	}
@@ -299,7 +305,7 @@ struct Node *_list_search_by_first_name(struct Node *_first, char *_first_name)
   struct Node *_nodes = _list_create();
   struct Node *_ptr = _first;
 
-	while (_ptr != NULL)
+	while (_ptr != NULL && _ptr->data != NULL)
 	{
 	  if (strcmp(_first_name, _ptr->data->prenom) != 0)
 	  {
@@ -323,7 +329,7 @@ struct Node *_list_search_by_last_name(struct Node *_first, char *_last_name)
   struct Node *_nodes = _list_create();
   struct Node *_ptr = _first;
 
-	while (_ptr != NULL)
+	while (_ptr != NULL && _ptr->data != NULL)
 	{
 	  if (strcmp(_last_name, _ptr->data->nom) != 0)
 	  {
@@ -362,6 +368,11 @@ struct Node *_list_intersect(struct Node *_first_one, struct Node *_first_two)
     _ptr_one = _ptr_one->next;
   }
 
+  if (_intersection->data == NULL)
+  {
+    return NULL;
+  }
+
   return _intersection;
   
 }
@@ -374,8 +385,7 @@ struct Node *_list_show_and_select(struct Node *_first)
   
   while (_ptr != NULL && _ptr->data != NULL)
   {
-    printf("LOG2\n");
-    printf("%d. %s  %s  id: %d\n", currentSelection, _ptr->data->nom, _ptr->data->prenom, _ptr->data->identifiant);
+    printf("%d. %s  %s  cin: %s\n", currentSelection, _ptr->data->nom, _ptr->data->prenom, _ptr->data->cin);
     currentSelection++;
     _ptr = _ptr->next;
   }
