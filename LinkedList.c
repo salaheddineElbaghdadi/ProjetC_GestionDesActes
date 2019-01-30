@@ -87,9 +87,10 @@ void _list_show(struct Node *_first)
   {
     if (_ptr->data != NULL)
     {
-      printf("%d     %s  %s\n", _ptr->data->identifiant,
+      printf("%d     %s  %s  %s\n", _ptr->data->identifiant,
                                 _ptr->data->nom,
-                                _ptr->data->prenom);
+                                _ptr->data->prenom,
+                                _ptr->data->cin);
     }
     _ptr = _ptr->next;
   }

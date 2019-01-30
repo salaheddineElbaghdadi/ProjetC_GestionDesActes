@@ -29,7 +29,8 @@ struct Personne
 	char nom[NAME_SIZE];
 	char prenom[NAME_SIZE];
 	enum Sexe sexe;
-	struct Date dateDeNaissance;
+	//struct Date dateDeNaissance;
+	int dateDeNaissance[3];
 	struct Lieu	lieuDeNaissance;
 	int identifiant;
 	char cin[CIN_SIZE];
@@ -39,7 +40,8 @@ struct Personne
 
 	// Ici ajouter nombre d'enfants et leurs identifiants
 	int nombreEnfants;
-	int enfants[NOMBRE_ENFANTS_MAX];
+	//int enfants[NOMBRE_ENFANTS_MAX];
+	char enfants[NOMBRE_ENFANTS_MAX][CIN_SIZE];
 };
 
 
@@ -47,6 +49,7 @@ struct Personne
 struct Personne *_personne_read(struct Node*);
 void _personne_show(struct Personne*);
 struct Personne *_personne_search(struct Node*);
+void _personne_modify(struct Node*, struct Personne*);
 
 
 // Global variables

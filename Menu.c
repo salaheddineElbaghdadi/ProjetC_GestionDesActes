@@ -5,6 +5,7 @@
 #include "Menu.h"
 #include "LinkedList.h"
 #include "Personne.h"
+#include "login.h"
 
 
 
@@ -19,10 +20,17 @@ void _menu_sauvegarder(struct Node*);
 int _menu_quiter(struct Node*);
 void _menu_trier_liste_par_identifiants(struct Node*);
 void _menu_trier_liste_par_noms(struct Node*);
-void _menu_imprimer_info_personne(struct Node*);
+void _menu_afficher_info_personne(struct Node*);
+void _menu_imprimer_acte(struct Node*);
 
 void _menu_show(struct Node **_first_node)
 {
+    int log;
+    do {
+        log = _login();
+    } while (log != 1);
+
+
     int input;
     _data_saved = 1;
     do
@@ -42,8 +50,8 @@ void _menu_show(struct Node **_first_node)
         printf("%d. Chercher une personne par son identifiant\n", CHERCHER_PERSONNE_PAR_IDENTIFIANT);
         printf("%d. Trier la liste des personne par identifiants\n", TRIER_LISTE_PERSONNE_PAR_IDENTIFIANT);
         printf("%d. Trier la liste des personne par noms\n", TRIER_LISTE_PERSONNE_PAR_NOM);
-        printf("%d. Imprimer les donnees d'une personne\n", IMPRIMER);
-        printf("%d. Afficher les information sur les enfants d'une personne\n", AFFICHER_INFO_ENFANT);
+        printf("%d. Afficher les donnees d'une personne\n", AFFICHER);
+        //printf("%d. Imprimer l'acte d'une personne\n", IMPRIMER);
         printf("%d. Sauvegarder\n", SAUVEGADER);
         printf("%d. Quiter\n", QUITER);
         printf(">>> ");
@@ -84,13 +92,13 @@ void _menu_show(struct Node **_first_node)
                 printf("Trier la list par noms: \n");
                 _menu_trier_liste_par_noms(*_first_node);
                 break;
-            case IMPRIMER:
+            case AFFICHER:
                 printf("Info personne: \n");
-                _menu_imprimer_info_personne(*_first_node);
+                _menu_afficher_info_personne(*_first_node);
                 break;
-            case AFFICHER_INFO_ENFANT:
+            //case IMPRIMER:
 
-                break;
+                //break;
             case SAUVEGADER:
                 _menu_sauvegarder(*_first_node);
                 break;
@@ -158,6 +166,18 @@ void _menu_supprimer_personne(struct Node **_first_node)
 
 void _menu_modifier(struct Node *_first_node)
 {
+    struct Personne *_personne = NULL;
+    char cin[CIN_SIZE];
+
+    //printf("Donner le cin de la personne a modifier: ");
+    //scanf("%s", cin);
+
+    _personne = _personne_search(_first_node);
+    if (_personne != NULL)
+    {
+        _personne_modify(_first_node, _personne);
+    }
+    /*
     int id;
     printf("Identifiant de la personne a modifier: ");
     scanf("%d", &id);
@@ -182,7 +202,7 @@ void _menu_modifier(struct Node *_first_node)
         printf("Identifiant: ");
         scanf("%d", &_new_data->identifiant);
         printf("Date de naissance (jj/mm/aaaa): ");
-        scanf("%d/%d/%d", &_new_data->dateDeNaissance.jour, &_new_data->dateDeNaissance.mois, &_new_data->dateDeNaissance.annee);
+        scanf("%d/%d/%d", &_new_data->dateDeNaissance[0], &_new_data->dateDeNaissance[1], &_new_data->dateDeNaissance[2]);
         printf("Sexe: ");
         scanf("%s", sexe);
         printf("Nombre d'enfants: ");
@@ -205,8 +225,8 @@ void _menu_modifier(struct Node *_first_node)
 
         // Ici: modifier les donnees de la personne dans la list
         _list_update(_first_node, data, _new_data);
+        */
         _data_saved = 0;
-    }
 
 }
 
@@ -284,7 +304,7 @@ void _menu_chercher_par_identifiant(struct Node *_first)
     scanf("%d", &id);
 
     struct Node *_data = _list_search_by_id(_first, id);
-    _menu_imprimer_info_personne(_data);
+    _menu_afficher_info_personne(_data);
 
     getchar();
     getchar();
@@ -300,7 +320,7 @@ void _menu_trier_liste_par_noms(struct Node *_first_node)
     _list_sort_by_name(_first_node);
 }
 
-void _menu_imprimer_info_personne(struct Node *_first_node)
+void _menu_afficher_info_personne(struct Node *_first_node)
 {
 
     char cin[CIN_SIZE];
@@ -311,7 +331,6 @@ void _menu_imprimer_info_personne(struct Node *_first_node)
     _data = _list_search_by_cin(_first_node, cin);
     if (_data != NULL)
     {
-        printf("LOG: data not null\n");
         _personne_show(_data->data);
     }
     else
@@ -384,4 +403,10 @@ int _menu_quiter(struct Node *_first_node)
             return 0;
         }
     }
+}
+
+
+void _menu_imprimer_acte(struct Node *_first)
+{
+    
 }
